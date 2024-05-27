@@ -28,13 +28,17 @@ function App() {
   };
   const onChangeSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const newTodo: Todo = {
-      id: todos.length,
-      inputValue: inputValue,
-      progress: false,
-    };
-    setTodos([...todos, newTodo]);
-    setInputValue("");
+    if (inputValue.length > 0) {
+      const newTodo: Todo = {
+        id: todos.length,
+        inputValue: inputValue,
+        progress: false,
+      };
+      setTodos([...todos, newTodo]);
+      setInputValue("");
+    } else {
+      alert("Enter more than 1 letter");
+    }
   };
 
   const handleChangeCheck = (id: number, progress: boolean) => {
@@ -46,7 +50,7 @@ function App() {
     });
     setTodos([...newTodos]);
   };
-  const onChangeEdit = (id: number, inputValue: string) => {
+  const handleChangeEdit = (id: number, inputValue: string) => {
     const newTodo = todos.map((todo) => {
       if (todo.id === id) {
         todo.inputValue = inputValue;
@@ -102,7 +106,7 @@ function App() {
                   <input
                     className="input-base"
                     value={todo.inputValue}
-                    onChange={(e) => onChangeEdit(todo.id, e.target.value)}
+                    onChange={(e) => handleChangeEdit(todo.id, e.target.value)}
                     disabled={todo.progress}
                   />
                   <input
