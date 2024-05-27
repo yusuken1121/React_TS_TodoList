@@ -36,7 +36,13 @@ function App() {
     });
     setTodos([...newTodo]);
   };
-  console.log(todos);
+
+  const onClickDelete = (id: number) => {
+    const newTodos = todos.filter((todo) => {
+      return todo.id !== id;
+    });
+    setTodos([...newTodos]);
+  };
 
   return (
     <>
@@ -60,6 +66,11 @@ function App() {
                 <input
                   type="checkbox"
                   onChange={() => handleChangeCheck(todo.id, todo.progress)}
+                />
+                <input
+                  type="button"
+                  value="Delete"
+                  onClick={() => onClickDelete(todo.id)}
                 />
               </li>
             );
