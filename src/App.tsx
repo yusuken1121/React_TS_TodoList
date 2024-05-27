@@ -16,6 +16,7 @@ function App() {
       progress: false,
     };
     setTodos([...todos, newTodo]);
+    setInputValue("");
   };
 
   const handleChangeCheck = (id: number, progress: boolean) => {
@@ -49,7 +50,11 @@ function App() {
       <div>
         <h2>Todo List in TypeScript</h2>
         <form onSubmit={(e) => onChangeSubmit(e)}>
-          <input type="text" onChange={(e) => onChangeTodo(e)} />
+          <input
+            type="text"
+            value={inputValue}
+            onChange={(e) => onChangeTodo(e)}
+          />
           <input type="submit" value="Add the Todo" />
         </form>
       </div>
