@@ -5,7 +5,6 @@ import { Todo } from "./types/todo";
 function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [inputValue, setInputValue] = useState<string>("");
-  const [progress, setProgress] = useState<boolean>(false);
   const onChangeTodo = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
@@ -19,8 +18,14 @@ function App() {
     setTodos([...todos, newTodo]);
   };
 
-  const handleChangeCheck = () => {
-    setProgress(!progress);
+  const handleChangeCheck = (id: number, progress: boolean) => {
+    const newTodos = todos.map((todo) => {
+      if (todo.id === id) {
+        todo.progress = !progress;
+      }
+      return todo;
+    });
+    setTodos([...newTodos]);
   };
   const onChangeEdit = (id: number, inputValue: string) => {
     const newTodo = todos.map((todo) => {
@@ -31,6 +36,7 @@ function App() {
     });
     setTodos([...newTodo]);
   };
+  console.log(todos);
 
   return (
     <>
@@ -49,8 +55,12 @@ function App() {
                 <input
                   value={todo.inputValue}
                   onChange={(e) => onChangeEdit(todo.id, e.target.value)}
+                  disabled={todo.progress}
                 />
-                <input type="checkbox" onChange={handleChangeCheck} />
+                <input
+                  type="checkbox"
+                  onChange={() => handleChangeCheck(todo.id, todo.progress)}
+                />
               </li>
             );
           })}
