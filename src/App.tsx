@@ -1,6 +1,9 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import "./App.css";
 import { Todo } from "./types/todo";
+import { Header } from "./components/Header";
+import { TodoForm } from "./components/TodoForm";
+import { TodoList } from "./components/TodoList";
 
 function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -71,59 +74,23 @@ function App() {
     <>
       <div className="text-center m-11">
         <div className="flex-col justify-center">
-          <div className="flex justify-center py-11 ">
-            <h2 className="text-3xl font-bold">Todo List in TypeScript</h2>
-            <div className="w-8 h-8 flex">
-              <img
-                onClick={() => {
-                  onToggleDarkMode();
-                }}
-                src={currentImage}
-                alt=""
-              />
-            </div>
-          </div>
-
-          <form className="flex-col" onSubmit={(e) => onChangeSubmit(e)}>
-            <input
-              className="input-base"
-              placeholder="Enter what you want to do here"
-              type="text"
-              value={inputValue}
-              onChange={(e) => onChangeTodo(e)}
-            />
-            <input className="button-base" type="submit" value="Add the Todo" />
-          </form>
+          <Header
+            onToggleDarkMode={onToggleDarkMode}
+            currentImage={currentImage}
+          />
+          <TodoForm
+            onChangeSubmit={onChangeSubmit}
+            inputValue={inputValue}
+            onChangeTodo={onChangeTodo}
+          />
         </div>
         <div>
-          <ul>
-            {todos.map((todo) => {
-              return (
-                <li
-                  className="flex justify-center items-center"
-                  key={`${todo.id}`}
-                >
-                  <input
-                    className="input-base"
-                    value={todo.inputValue}
-                    onChange={(e) => handleChangeEdit(todo.id, e.target.value)}
-                    disabled={todo.progress}
-                  />
-                  <input
-                    className="box-border m-4 size-5"
-                    type="checkbox"
-                    onChange={() => handleChangeCheck(todo.id, todo.progress)}
-                  />
-                  <input
-                    className="button-base"
-                    type="button"
-                    value="Delete"
-                    onClick={() => onClickDelete(todo.id)}
-                  />
-                </li>
-              );
-            })}
-          </ul>
+          <TodoList
+            todos={todos}
+            handleChangeCheck={handleChangeCheck}
+            handleChangeEdit={handleChangeEdit}
+            onClickDelete={onClickDelete}
+          />
         </div>
       </div>
     </>
