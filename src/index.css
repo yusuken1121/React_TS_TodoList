@@ -7,7 +7,7 @@
     @apply border-2 p-1 m-3 min-w-60 dark:text-black;
   }
   .button-base {
-    @apply h-8 box-border py-1 px-5 bg-violet-500 text-white font-semibold rounded-full shadow-md hover:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-400 focus:ring-opacity-75;
+    @apply h-8 box-border py-1 px-5 bg-violet-500 dark:bg-lime-500 text-white font-semibold rounded-full shadow-md hover:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-400 focus:ring-opacity-75;
   }
   @layer base {
     body {
