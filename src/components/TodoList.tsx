@@ -20,6 +20,7 @@ export const TodoList: FC<TodoListProps> = ({
       {todos.map((todo) => {
         return (
           <TodoItem
+            key={todo.id}
             todo={todo}
             handleChangeCheck={handleChangeCheck}
             handleChangeEdit={handleChangeEdit}
